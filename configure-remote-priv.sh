@@ -1,9 +1,7 @@
 #!/bin/bash
 
-export HOME_DIR="/home/vagrant"
-
 display_usage() {
-        echo -e "\nUsage:\n$0 HOME_DIR SERVER_IP CRC_IP \n"
+        echo -e "\nUsage:\n$0 SERVER_IP CRC_IP \n"
 }
 
 if [ "$EUID" -ne 0 ]
@@ -18,9 +16,8 @@ then
     exit 1
 fi
 
-HOME_DIR=$1
-SERVER_IP=$2
-CRC_IP=$3
+SERVER_IP=$1
+CRC_IP=$2
 
 # get deps
 dnf -y install haproxy policycoreutils-python-utils firewalld
@@ -71,18 +68,5 @@ EOF
 systemctl stop haproxy || :
 systemctl enable haproxy || :
 systemctl start haproxy
-
-cat << EOF > $HOME_DIR/00-use-dnsmasq.conf
-[main]
-dns=dnsmasq
-EOF
-
-cat << EOF > $HOME_DIR/01-crc.conf
-address=/apps-crc.testing/$SERVER_IP
-address=/api.crc.testing/$SERVER_IP
-EOF
-
-echo "On your host machine, you need to copy $HOME/00-use-dnsmasq.conf to /etc/NetworkManager/conf.d/ and "
-echo "$HOME/01-crc to /etc/NetworkManager/dnsmasq.d/ and then sudo systemctl reload NetworkManager."
 
 
