@@ -18,16 +18,18 @@ Your mileage may vary on how exactly to enable this using other virtualization t
 
 OK, now make sure you have enough RAM, cpu, and disk for the requirements.
 The RAM and cpu are hard requirements but the disk is thinly provisioned and will use about 30Gs after the install is complete.
-You can modify these settings at the top of the Vagrantfile if you need to.
+You can modify these settings at the top of the `Vagrantfile` if you need to.
 
 Fedora also has an annoying thing where the name of your NICs are not gauranteed.
 As a result, you need to confirm that your server has a NIC called "eno1" which is the one you want your CodeReady Continaers instance to listen on.
 You can confirm this on a command line with `ip a` and look for the name of the NIC.
-If you have a different name, change the "dev" attribute on the "public_network" directive in the Vagrantfile.
+If you have a different name, change the "dev" attribute on the "public_network" directive in the `Vagrantfile`.
 
-If you are running this Vagrantfile on the computer your are directly accessing (the one you will be running a web browser in or `oc` from), you need remove the `public_network` altogther.
+If you are running this `Vagrantfile` on the computer your are directly accessing (the one you will be running a web browser in or `oc` from), you need remove the `public_network` altogther.
 As the `public_network` is using macvtap to create the interface, the IP is not directly available from the host.
 If you want more details about macvtap and why you can't access those IPs, see Scott Lowe's [blog post](https://blog.scottlowe.org/2016/02/09/using-kvm-libvirt-macvtap-interfaces/) or the [libvirt  documentation](https://libvirt.org/formatdomain.html#elementsNICSDirect).
+
+Finally, you need to go get your "pull secret" by following the [CodeReady Containers Install Instructions](https://cloud.redhat.com/openshift/install/crc/installer-provisioned).  Once you get the secret, put it in a file called "pull-secret" in the same directory as the `Vagrantfile` (and shell scripts).
 
 ## Launch
 
