@@ -44,9 +44,10 @@ else
 fi
 
 #start script to setup remote access to crc
-echo "running remote-config setup in background"
+echo "Running remote-config setup in background"
 tmux new-session -d -s 'config-remote' \
         "~/configure-remote.sh > $REMOTE_LOG_FILE 2>&1"
-echo "remote config shell script is running in a tmux session in the vagrant vm." \
+echo "Remote config shell script is running in a tmux session in the vagrant vm." \
         "You can check its status with vagrant ssh -c \"tail -f $REMOTE_LOG_FILE\""
+echo "When everything is complete, please see $REMOTE_LOG_FILE for instructions on configuring your host DNS"
 

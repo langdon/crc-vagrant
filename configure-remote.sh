@@ -9,6 +9,8 @@ do
 done
 
 # get some data about the machine
+#don't need this anymore but the command might be useful
 SERVER_IP=`hostname -I | awk ' { print $2 }'`
 CRC_IP=`$HOME/bin/crc ip`
 sudo ./configure-remote-priv.sh $HOME $SERVER_IP $CRC_IP
+

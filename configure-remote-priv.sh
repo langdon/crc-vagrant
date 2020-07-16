@@ -3,7 +3,7 @@
 export HOME_DIR="/home/vagrant"
 
 display_usage() {
-        echo -e "\nUsage:\n$0 HOME_DIR VAGRANT_PUBLIC_IP CRC_IP \n"
+        echo -e "\nUsage:\n$0 HOME_DIR SERVER_IP CRC_IP \n"
 }
 
 if [ "$EUID" -ne 0 ]
@@ -45,8 +45,8 @@ timeout client 0
 timeout server 0
 
 frontend apps
-bind $SERVER_IP:80
-bind $SERVER_IP:443
+bind :80
+bind :443
 option tcplog
 mode tcp
 default_backend apps
@@ -54,11 +54,10 @@ default_backend apps
 backend apps
 mode tcp
 balance roundrobin
-option ssl-hello-chk
-server webserver1 $CRC_IP check
+server webserver1 $CRC_IP
 
 frontend api
-bind $SERVER_IP:6443
+bind :6443
 option tcplog
 mode tcp
 default_backend api
@@ -66,8 +65,7 @@ default_backend api
 backend api
 mode tcp
 balance roundrobin
-option ssl-hello-chk
-server webserver1 $CRC_IP:6443 check
+server webserver1 $CRC_IP:6443
 EOF
 
 systemctl stop haproxy || :
@@ -84,6 +82,7 @@ address=/apps-crc.testing/$SERVER_IP
 address=/api.crc.testing/$SERVER_IP
 EOF
 
-#sudo mv /tmp/00-use-dnsmasq.conf /etc/NetworkManager/conf.d/00-use-dnsmasq.conf
+echo "On your host machine, you need to copy $HOME/00-use-dnsmasq.conf to /etc/NetworkManager/conf.d/ and "
+echo "$HOME/01-crc to /etc/NetworkManager/dnsmasq.d/ and then sudo systemctl reload NetworkManager."
 
 
