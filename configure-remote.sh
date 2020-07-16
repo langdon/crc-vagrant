@@ -27,6 +27,6 @@ address=/api.crc.testing/$SERVER_IP
 EOF
 
 echo "On your host machine, you need to copy $HOME/00-use-dnsmasq.conf to /etc/NetworkManager/conf.d/ and "
-echo "$HOME/01-crc to /etc/NetworkManager/dnsmasq.d/ and then sudo systemctl reload NetworkManager."
+echo "$HOME/01-crc to /etc/NetworkManager/dnsmasq.d/ and then 'sudo systemctl reload NetworkManager'."
 
 

@@ -36,8 +36,8 @@ if ! ~/bin/crc ip ; then
     tmux new-session -d -s 'crc-start' \
         "~/bin/crc start -p ~/pull-secret > $CRC_LOG_FILE 2>&1"
 
-    echo "crc start is running in a tmux session in the vagrant vm. " \
-        "You can check its status with vagrant ssh -c \"tail -f $CRC_LOG_FILE\""
+    echo "crc start is running in a tmux session in the Vagrant VM. " \
+        "You can check its status with 'vagrant ssh -c \"tail -f $CRC_LOG_FILE\"'"
 
 else
     echo "crc is already running on this instance."
@@ -47,7 +47,7 @@ fi
 echo "Running remote-config setup in background"
 tmux new-session -d -s 'config-remote' \
         "~/configure-remote.sh > $REMOTE_LOG_FILE 2>&1"
-echo "Remote config shell script is running in a tmux session in the vagrant vm." \
-        "You can check its status with vagrant ssh -c \"tail -f $REMOTE_LOG_FILE\""
-echo "When everything is complete, please see $REMOTE_LOG_FILE for instructions on configuring your host DNS"
+echo "Remote config shell script is running in a tmux session in the Vagrant VM." \
+        "You can check its status with 'vagrant ssh -c \"tail -f $REMOTE_LOG_FILE\"'"
+echo "When everything is complete, please see $REMOTE_LOG_FILE for instructions on configuring your host's DNS"
 

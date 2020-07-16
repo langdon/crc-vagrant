@@ -33,11 +33,6 @@ Vagrant.configure("2") do |config|
       "chmod u+x ~/setup-run-crc.sh"
     vagrant_host.vm.provision "shell", privileged: false, inline: \
       "~/setup-run-crc.sh"
-
-#    vagrant_host.vm.provision "shell", privileged: false, inline: \
-#      "sudo -E ~/configure-remote.sh"
-
-
   end
 end
 
