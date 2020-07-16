@@ -10,7 +10,7 @@ if [ "$EUID" -ne 0 ]
 fi
 
 # if less than one argument supplied, display usage
-if [  $# -le 2 ]
+if [  $# -le 1 ]
 then
     display_usage
     exit 1

@@ -13,7 +13,7 @@ done
 SERVER_IP=`hostname -I | awk ' { print $2 }'`
 CRC_IP=`$HOME/bin/crc ip`
 
-sudo ./configure-remote-priv.sh $HOME $SERVER_IP $CRC_IP
+sudo ./configure-remote-priv.sh $SERVER_IP $CRC_IP
 
 #create the host dns files
 cat << EOF > $HOME/00-use-dnsmasq.conf
