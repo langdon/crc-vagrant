@@ -35,7 +35,7 @@ Finally, you need to go get your "pull secret" by following the [CodeReady Conta
 
 Once you have that stuff out of the way, you can launch the Vagrant image with `vagrant up`.
 The `vagrant up` process will take a bit of time and, unfortunately, crc will probably not be up by the time it is done.
-The Vagrantfile fires off a couple jobs in the background so the VM can come up even if crc isn't finished.
+The `Vagrantfile` fires off a couple jobs in the background so the VM can come up even if crc isn't finished.
 If you watch the output log at the end of the `vagrant up`, you will see a couple log files to monitor either in the VM or outside it.
 
 ```
@@ -47,14 +47,14 @@ If you watch the output log at the end of the `vagrant up`, you will see a coupl
 ```
 
 Once you see those both complete, you need to configure your host's DNS to find the CRC inside the Vagrant VM.
-Instructions for how to this will be in remote-config.log on the Vagrant guest.
+Instructions for how to do this will be at the end of the `remote-config.log` on the Vagrant guest.
 However, in simple terms, you need to copy the generated `00-use-dnsmasq.conf` and `01-crc.conf` out of the VM and into `/etc/NetworkManager/conf.d` and `/etc/NetworkManager/dnsmasq.d` (respectively) and `systemctl reload NetworkManager`.
 
 Once you have all that done, you should be able to access CRC via a web browser at `https://console-openshift-console.apps-crc.testing` but, you may want to check `crc console`'s output in case something has changed.
-The `oc` client should work to, using `https://api.crc.testing:6443`.
-However, check the console output in case that is any different as well.
+The `oc` client should work too, using `https://api.crc.testing:6443`.
+However, check the `console` output in case that is any different as well.
 
-From here, `crc` docs and `oc` docs can take over, just remember that you have `crc` inside the guest VM and you want to use `oc` or a web browser from a remote machine to interact with CRC (aka OpenShift).
+From here, [`crc` docs](https://access.redhat.com/documentation/en-us/red_hat_codeready_containers/1.11/) and [`oc` docs](https://access.redhat.com/documentation/en-us/openshift_container_platform/4.5/html/cli_tools/index) can take over, just remember that you have `crc` inside the guest VM and you want to use `oc` or a web browser from a remote machine to interact with CRC (aka OpenShift).
 
 Please leave comments, issues, etc on this repo.
 Also, a huge shout out to Jason Dobies ([@jdob](https://twitter.com/jdob)) and his "[Accessing CodeReady Containers on a Remote Server](https://www.openshift.com/blog/accessing-codeready-containers-on-a-remote-server/)" blog post and his upstream ;) [Trevor McKay's](https://github.com/tmckayus) [gist](https://gist.github.com/tmckayus/8e843f90c44ac841d0673434c7de0c6a) which I derived all the hard bits from.
