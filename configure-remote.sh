@@ -1,12 +1,16 @@
 #!/bin/bash
 
 #relies on configuration form setup-run-crc.sh
+check-status () { crc status | grep -E "OpenShift:\s+Running" > /dev/null 2>&1; }
 
-until [ `$HOME/bin/crc ip` ];
+#until [ `crc status | grep -E "OpenShift:\s+Running"` ];
+until check-status;
 do
   echo "Waiting for crc to come up......"
   sleep 10s
 done
+
+echo "crc running; proceeding..."
 
 # get some data about the machine
 #don't need this anymore but the command might be useful
